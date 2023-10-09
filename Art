@@ -1,0 +1,24 @@
+     _____   empty space for 5 char, then 5 hyphen
+     |   |   empty space for 5 char, then pipe, then 3 char
+     O   |   empty space for 5 char, capital O, 3 char, pipe
+    /|\  |   empty space for 4 char, forwardslash, pipe, backslash, 2 char, pipe
+    / \  |
+    ____________
+
+
+    note: draw frames from top to bottom,
+    starting with full hangman, ending with none.
+
+    use while loop (counting up) to add 7 node objects containing frames
+
+         _____ \n         |   | \n         O   | \n        /|\\  | \n        / \\  | \n        ____________ \n
+
+
+data = ["          _____ \n",
+"         |   | \n",
+"         O   | \n",
+"        /|\\  | \n",
+"        / \\  | \n",
+"        ____________ \n";]
+
+{{}}

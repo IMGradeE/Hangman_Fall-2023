@@ -1,0 +1,29 @@
+         |   | \n         O   | \n        /|\\  | \n
+         |   | \n         O   | \n        /|\\  | \n
+         |   | \n         O   | \n             | \n
+         |   | \n         O   | \n
+         |   | \n         O   | \n
+         |   | \n         O   | \n
+         |   | \n             | \n
+             | \n
+
+either a row is "             | \n"
+or,
+frames 1-7 have a noose
+frames 2-7 have a  head, and noose
+frame 3 has right arm
+frame 4 has torso, right arm
+frame 5 has left arm, torso, right arm
+frame 6 has right leg
+frame 7 has right and left leg
+
+
+stems midsection
+        /|\\  | \n \\ final state (5)
+         |\\  | \n (4)
+          \\  | \n (3)
+             | \n (0-2)
+Leg stems
+        / \\  | \n Loss state(7)
+          \\  | \n (6)
+             | \n (0-6)

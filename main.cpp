@@ -3,26 +3,40 @@
 
 using namespace std;
 
-template<class Y>
     class Node {
     public:
-        Y data;
-        Node<Y>* nextNode;
-        Node(Y val = NULL):data(val),nextNode(nullptr){
+
+
+        // if frame x, from y+ print data=0:0 (empty)
+        bool isHung = false;
+        int count;
+        Node* nextNode;
+        Node(int val):nextNode(nullptr){
+            int count = 0;
+            stringstream stringstream1;
+
+            if (val == 0){ // counting up
+                isHung = true;
+            }
+            if (val > 0)
+                ;
+
         }
+
+
         ~Node(){
             delete nextNode;
         }
     };
 
-template<class T>
+
 class QUEUE {
 public:
 
     QUEUE():head(nullptr){
     }
 
-    Node<T>* head;
+    Node* head;
 
     enum main_menu{
         QUIT = 0,
@@ -41,8 +55,8 @@ public:
         }
     }
 
-    void add(T val){
-        Node<T>* temp = new Node<T>(val);
+    void add(int val){
+        Node* temp = new Node(val);
         if(isEmpty())
         {
             head = temp;
@@ -96,9 +110,9 @@ public:
     }
 };
 
-template<class T>
-ostream &operator<<( ostream &out /*LHS*/, QUEUE<T>* s /*RHS*/){
-    Node<T>* temp = s->head;
+
+ostream &operator<<( ostream &out /*LHS*/, QUEUE* s /*RHS*/){
+    Node* temp = s->head;
     while (temp != nullptr){
         stringstream ss;
         ss << temp->data;
@@ -113,54 +127,5 @@ ostream &operator<<( ostream &out /*LHS*/, QUEUE<T>* s /*RHS*/){
 }
 
 int main() {
-    QUEUE<int> fifo;
-    int intin;
-    int choice = 0;
-    bool quit = false;
-    fifo.test();
-        do{
-        cout << "\nPlease enter the number that corresponds to the desired operation:\n"
-                "0. Quit;\n"
-                "1. Add int to queue;\n"
-                "2. Delete int from queue (last added is removed);\n"
-                "3. Peek (Returns the value next in line);\n"
-                "4. Overload (Returns all values in the queue in order);\n";
-        cin >> choice;
-        choice = static_cast<QUEUE<int>::main_menu>(choice);
-        switch (choice) {
-            case QUEUE<int>::QUIT:{
-                quit = true;
-                break;
-            }
-            case QUEUE<int>::ADD:{
-                cout << "\n Please enter the integer you want to add to the list, "
-                        "then press enter. (Do not include spaces, and press 0 to stop.)\n";
-                do{
-                    cout << "\n Please enter the integer you want to add to the list, "
-                            "then press enter. (Do not include spaces, and press 0 to stop.)\n";
-                    cin >> intin;
-                    if(intin!=0)
-                        fifo.add(intin);
-                }while(intin != 0);
-                break;
-            }
-            case QUEUE<int>::REMOVE:{
-                fifo.remove();
-                break;
-            }
-            case QUEUE<int>::PEEK:{
-                cout << fifo.peek();
-                break;
-            }
-            case QUEUE<int>::OVERLOAD:{
-                cout << &fifo;
-                break;
-            }
-            default:
-                choice = -1;
-                cout<< "\nThat input was not valid, please try again.\n";
-                break;
-        }
-        cout << "\n\n";
-    }while(!quit);
+
 }
