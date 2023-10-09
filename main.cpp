@@ -1,8 +1,9 @@
 #include <iostream>
 #include <sstream>
-
+#include "Queue.h"
+#include <windows.h>
 using namespace std;
-
+/*
     class Node {
     public:
 
@@ -111,7 +112,7 @@ public:
 };
 
 
-ostream &operator<<( ostream &out /*LHS*/, QUEUE* s /*RHS*/){
+ostream &operator<<( ostream &out *//*LHS*//*, QUEUE* s *//*RHS*//*){
     Node* temp = s->head;
     while (temp != nullptr){
         stringstream ss;
@@ -124,8 +125,14 @@ ostream &operator<<( ostream &out /*LHS*/, QUEUE* s /*RHS*/){
     delete temp;
     out << "\n";
     return out;
-}
+}*/
 
 int main() {
-
+    for(int i = 0; i < 7; ++i) {
+        unique_ptr<HangManImageFrame> frame(new HangManImageFrame(i));
+        cout << frame->frame;
+        Sleep(2000);
+        cout << '\n'<< '\n'<< '\n'<< '\n'<< '\n';
+    }
+return 0;
 }
