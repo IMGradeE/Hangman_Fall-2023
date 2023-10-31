@@ -5,4 +5,4 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_executable(Queue2
         main.cpp
-        Queue.h)
+        Headers/Queue.h Headers/HangManImage.h Headers/HangManImage.h Headers/Game.h)
