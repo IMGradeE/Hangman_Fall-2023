@@ -12,6 +12,7 @@ using namespace std;
 
 template<class T>
 class Queue{
+
 public:
     struct Node{
        shared_ptr<Node> next_node;
@@ -23,7 +24,7 @@ public:
     Queue<T>(){
     }
     void getHangmanQueue();
-    T get();
+    T getFrame();
     boolean remove();
     boolean isEmpty();
     void add(T data);
@@ -60,7 +61,7 @@ void Queue<T>::add(T data) {
 }
 
 template<class T>
-T Queue<T>::get(){
+T Queue<T>::getFrame(){
     if(isEmpty()){
         return NULL;
     }

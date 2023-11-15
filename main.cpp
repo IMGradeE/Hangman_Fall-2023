@@ -5,6 +5,27 @@
 using namespace std;
 int main() {
 int difficulty;
-cin >> difficulty;
-GameInstance game = GameInstance(difficulty);
+char choice;
+/*cin >> difficulty;*/
+
+GameInstance game = GameInstance(difficulty = 0);
+do {
+    game.display();
+    try{
+        cin >> choice;
+    }catch (exception){
+        cout << "\nPlease try again; only input one character.";
+        continue;
+    }
+    choice = tolower(choice);
+    if (game.checkValidity(choice)){
+        continue;
+    }else{
+        game.wrongGuess();
+        continue;
+    }
+}while(game.getLives() > 0);
+
+game.display();
+
 }

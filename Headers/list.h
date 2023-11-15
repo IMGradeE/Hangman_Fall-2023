@@ -4,21 +4,32 @@
 
 #ifndef QUEUE2_LIST_H
 #define QUEUE2_LIST_H
+template<class Type>
+class List;
 
+
+
+template <class Type>
 class List{
 public:
     struct Node{
-        shared_ptr<Node> next_node;
-        shared_ptr<Node> last_node;
-        string Word;
-        Node(string val):
-        Word(val),next_node(nullptr),last_node(nullptr){}
+        Node* next_node;
+
+        Type nodeData;
+        Node(Type val):
+                nodeData(val), next_node(nullptr){}
     };
+    Node* head = nullptr;
 
-    shared_ptr<Node> head = nullptr;
-    shared_ptr<Node> tail = nullptr;
 
-    List():tail(nullptr),head(nullptr){}
+    List<Type>():head(nullptr){}
+
+    List<Type>(string data):head(nullptr){
+        for (char i : data){
+            add(i);
+        }
+
+    }
 
     boolean isEmpty(){
         if(head == nullptr){
@@ -27,11 +38,10 @@ public:
         return false;
     }
 
-    void add(string data){
-        shared_ptr<Node> temp(new Node(data));
+    void add(Type data){
+        auto temp = new Node(data);
         if (isEmpty()){
             head = temp;
-
             return;
         }
         auto current = head;
@@ -40,5 +50,40 @@ public:
         }
         current->next_node = temp;
     };
+
+    Node* find(Type val){
+        auto temp = this->head;
+
+        while(temp && temp->nodeData != val){
+            temp = temp->next_node;
+        }
+        return temp;
+    }
+    void removeAllMatches(Type val){
+        auto temp = find(val);
+        if (temp){
+            temp->nodeData = toupper(temp->nodeData);
+            removeAllMatches(val);
+        }
+
+    }
+
+
+friend ostream& operator<<(ostream &out, List<Type>* list){
+    Node* temp = list->head;
+    while(temp){
+        if (temp->nodeData == tolower(temp->nodeData)) {
+            out << '_';
+        }else{
+            char c = tolower(temp->nodeData);
+            out << c;
+        }
+        temp = temp->next_node;
+    }
+
+    return out;
+}
+
 };
+
 #endif //QUEUE2_LIST_H
