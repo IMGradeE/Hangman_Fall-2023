@@ -8,6 +8,7 @@
 #include <sstream>
 #include <Windows.h>
 #include "HangManImage.h"
+
 using namespace std;
 
 template<class T>

@@ -25,10 +25,9 @@ public:
     List<Type>():head(nullptr){}
 
     List<Type>(string data):head(nullptr){
-        for (char i : data){
+        for (Type i : data){
             add(i);
         }
-
     }
 
     boolean isEmpty(){
@@ -67,7 +66,6 @@ public:
         }
 
     }
-
 
 friend ostream& operator<<(ostream &out, List<Type>* list){
     Node* temp = list->head;

@@ -4,6 +4,7 @@
 
 using namespace std;
 int main() {
+bool winner = false;
 int difficulty;
 char choice;
 /*cin >> difficulty;*/
@@ -19,6 +20,10 @@ do {
     }
     choice = tolower(choice);
     if (game.checkValidity(choice)){
+        if (game.winCheck()) {
+            winner = true;
+            break;
+        }
         continue;
     }else{
         game.wrongGuess();
@@ -26,6 +31,6 @@ do {
     }
 }while(game.getLives() > 0);
 
-game.display();
+game.display(winner);
 
 }
