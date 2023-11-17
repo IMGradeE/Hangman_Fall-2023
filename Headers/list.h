@@ -64,17 +64,22 @@ public:
             temp->nodeData = toupper(temp->nodeData);
             removeAllMatches(val);
         }
-
     }
 
 friend ostream& operator<<(ostream &out, List<Type>* list){
     Node* temp = list->head;
     while(temp){
-        if (temp->nodeData == tolower(temp->nodeData)) {
-            out << '_';
-        }else{
-            char c = tolower(temp->nodeData);
-            out << c;
+        if (isalpha(temp->nodeData)){
+            if(temp->nodeData == tolower(temp->nodeData)) {
+                out << '_';
+            }else{
+                char c = tolower(temp->nodeData);
+                out << c;
+            }
+        }else if(temp->nodeData == ' '){
+            out << ' ';
+        }else if (temp->nodeData == '\''){
+            out << '\'';
         }
         temp = temp->next_node;
     }

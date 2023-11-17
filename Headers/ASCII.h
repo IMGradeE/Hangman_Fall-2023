@@ -12,14 +12,27 @@ struct ASCIIRender {
     int count = 0;
     string thinChars[5] = {"'",",",  ".",".",  "'"};
     string thickChars[5] = {"&","$", "#", "@","?"};
-    int randomIndex(){
-        int ret = (rand() %5);
+    int height = 4;
+    int width = 6;
+    
+    void clearConsole(){
+        stringstream ss;
+        int i = 0;
+        while(i<1800){ // "clears" console but not really
+            ss<<'\n';
+            ++i;
+        }
+        cout << ss.str();
+        ss.clear();
+    };
+    
+    int randomIndex(int num = 5){
+        int ret = (rand() %num);
         return ret;
     }
+    
     string enhance(string asciiString){
         string ret;
-        int height = 8;
-        int width = 8;
         for (int i = 0; i < height; ++i) {
             count = width;
             for (char c: asciiString) {
@@ -28,13 +41,13 @@ struct ASCIIRender {
                         count = width;
                     }
                     if (c == '-') {
-                        if (i <= width/2) {
+                        if (i < height/2) {
                             ret += thickChars[randomIndex()];
                         } else {
                             ret += thinChars[randomIndex()];
                         }
                     } else if (c == '_') {
-                        if (i >= width/2) {
+                        if (i >= height/2) {
                             ret += thickChars[randomIndex()];
                         } else {
                             ret += thinChars[randomIndex()];
@@ -79,15 +92,22 @@ struct ASCIIRender {
                         }
                         k = width;
                     }else if (c == '\n') {
+                        for (int j = 0; j < 1920/width*2;++j){
+                            ret += thinChars[randomIndex()];
+                        }
                         ret += "\n";
                         break;
                     }else if(c == 'O') {
-                        if(i == 0 || i == height -1){
-                            ret += thickChars[randomIndex()];
-                        }else if (k == 0 || k == width - 1){
+                        if(i == 0 || i == height -1||k == 0 || k == width - 1){
                             ret += thickChars[randomIndex()];
                         }else{
+                            ret += ' ';
+                        }
+                    }else if(c == ':') {
+                        if (k < width/2 || k > width - (width/2)){
                             ret += thinChars[randomIndex()];
+                        }else{
+                                ret += '#';
                         }
                     }else {
                         ret += thinChars[randomIndex()];

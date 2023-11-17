@@ -12,16 +12,17 @@ using namespace std;
 class HangManImageFrame {
 private:
     string data[5][3] = {
-            {"                 | \n", /* 4 lines at node 7, 3 at node 6, 2 at node 5, 1 at node 8*/
-                   "         --------\\ \n", /*in every frame top*/
-                   "     ____________| \n", /*in every frame bottom*/},
-            {"        |        | \n"},
-            {"        O        | \n"},
-            {"         \\      | \n",
-                   "        |\\      | \n",
-                   "       /|\\      | \n"},
-            {"       / \\      | \n",
-                   "         \\      |\n"}
+            {"                      |  \n", /* 4 lines at node 7, 3 at node 6, 2 at node 5, 1 at node 8*/
+                   "             r--------\\  \n", /*in every frame top*/
+                   "            __________|  \n", /*in every frame bottom*/},
+            {
+                   "             :        |  \n"},
+            {"             O        |  \n"},
+            {"              l\\      |  \n",
+                   "             |l\\      |  \n",
+                   "           r/|l\\      |  \n"},
+            {"           r/ l\\      |  \n",
+                   "              l\\      |  \n"}
     }; // TODO reformat
     string frame;
     string makeframe(int control_param, int innerlines = 4);
@@ -37,6 +38,15 @@ public:
 };
 
 string HangManImageFrame::makeframe(int control_param, int innerlines){
+    stringstream ss;
+    for (int i = 0; i < 30/ascii.height; ++i) {
+        for (int j = 0; j < 20/ascii.width ; ++j) {
+            ss << ' ';
+        }
+        ss<<'\n';
+        frame += ascii.enhance(ss.str());
+        ss.clear();
+    }
     frame += ascii.enhance(data[0][1]); // Top of hanging post
     switch (control_param) {
         case 7:
