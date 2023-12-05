@@ -2,12 +2,11 @@
 // Created by wilke on 10/30/2023.
 //
 
-
 #ifndef QUEUE2_GAME_H
 #define QUEUE2_GAME_H
 #include <iostream>
 #include <sstream>
-#include <windows.h>
+#include <Windows.h>
 #include "Queue.h"
 #include "list.h"
 #include "ASCII.h"
@@ -53,6 +52,9 @@ private:
             "bored ape to blind ape pipeline",
             "phrase nineteen",
             "great job everyone"}};
+
+
+
     int lives = 7;
     List<char>* characterList = nullptr;
     Queue<string>* frameQueue = nullptr;
@@ -63,17 +65,12 @@ private:
 
 
 public:
-    GameInstance(int diffChoice){
+    GameInstance(int diffChoice = 1){
         frameQueue = (new Queue<string>());
         characterList = new List<char>(wordsxphrases[diffChoice-1][ASCIIRender().randomIndex(20)]);
         frameQueue->getHangmanQueue();
-
-        // remove all matches until list all uppercase, or loss.
-        /*hard->append("giving");
-        easy->append("giving");*/
-        //take a word at random from array corresponding to difficulty choice
     }
-    // if find == nullptr --lives
+
     void display(){
         stringstream ss;
         ASCIIRender().clearConsole();
@@ -109,6 +106,8 @@ public:
             cout << "\n    You have already guessed "<< val << ", try again.\n     ";
             cin >> val;
             return checkValidity(val);
+        }else{
+            return false;
         }
     }
 
@@ -131,6 +130,7 @@ public:
     void wrongGuess(){
         --lives;
         frameQueue->remove();
+
     }
 
 };

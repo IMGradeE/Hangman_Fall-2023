@@ -5,28 +5,27 @@
 
 using namespace std;
 int main() {
-bool winner = false;
-int difficulty;
-char choice = '0';
-ASCIIRender ascii = ASCIIRender();
-
-stringstream ss;
-string titleCard[10] = {
-                        "| | r/l\\ |l\\ |t|-- |l\\r/| r/l\\ |l\\ |\n",
-                       "|-|r/r\\l\\| l\\|t|_/ | l/ |r/r\\l\\| l\\|\n"};
-ss<< "\n\n\n";
-for (int i = 0; i <3;++i){
-    for (string s: titleCard) {
-        ss << ascii.enhance(s)+ "\n\n";
+    bool winner = false;
+    int difficulty;
+    char choice = '0';
+    ASCIIRender ascii = ASCIIRender();
+    stringstream ss;
+    string titleCard[2] = {
+                            "| | r/l\\ |l\\ |t|-- |l\\r/| r/l\\ |l\\ |\n",
+                           "|-|r/r\\l\\| l\\|t|_/ | l/ |r/r\\l\\| l\\|\n"};
+    ss<< "\n\n\n";
+    for (int i = 0; i <3;++i){
+        for (string s: titleCard) {
+            ss << ascii.enhance(s) + "\n\n";
+        }
     }
-}
-cout << ss.str();
-ss.clear();
-cout << "\n    Choose between difficulty level 1 or 2 to Begin: ";
-
-cin >> difficulty;
+    cout << ss.str();
+    ss.clear();
+    cout << "\n    Choose between difficulty level 1 or 2 to Begin: ";
+    GameInstance game;
+    cin >> difficulty;
     do{
-        GameInstance game = GameInstance(difficulty);
+         game = GameInstance(difficulty);
         do {
             game.display();
             try {

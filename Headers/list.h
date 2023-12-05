@@ -30,7 +30,7 @@ public:
         }
     }
 
-    boolean isEmpty(){
+    bool isEmpty(){
         if(head == nullptr){
             return true;
         }

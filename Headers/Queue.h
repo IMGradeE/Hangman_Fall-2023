@@ -7,6 +7,7 @@
 #include <iostream>
 #include <sstream>
 #include <Windows.h>
+#include <memory>
 #include "HangManImage.h"
 
 using namespace std;
@@ -26,8 +27,8 @@ public:
     }
     void getHangmanQueue();
     T getFrame();
-    boolean remove();
-    boolean isEmpty();
+    bool remove();
+    bool isEmpty();
     void add(T data);
 };
 
@@ -40,7 +41,7 @@ void Queue<T>::getHangmanQueue() {
 
 //private
 template<class T>
-boolean Queue<T>::isEmpty() {
+bool Queue<T>::isEmpty() {
     if(head == nullptr){
         return true;
     }
@@ -70,7 +71,7 @@ T Queue<T>::getFrame(){
 }
 
 template<class T>
-boolean Queue<T>::remove() {
+bool Queue<T>::remove() {
     try{
         if (isEmpty()) {
             throw runtime_error("Queue is empty");

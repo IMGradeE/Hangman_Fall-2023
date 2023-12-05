@@ -36,7 +36,7 @@ struct ASCIIRender {
         for (int i = 0; i < height; ++i) {
             count = width;
             for (char c: asciiString) {
-                for(int k = 0; k<width;++k){
+                for(int k = 0; k< width;++k){
                     if (count <= 0){
                         count = width;
                     }
