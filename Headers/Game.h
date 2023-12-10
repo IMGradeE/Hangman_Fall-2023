@@ -8,80 +8,64 @@
 #include <sstream>
 #include <Windows.h>
 #include "Queue.h"
-#include "list.h"
-#include "ASCII.h"
+#include "SingleLinkedList.h"
+#include "HangmanGraphics.h"
+#include "CircularlyLinkedList.h"
+
 class GameInstance{
 private:
-
-    string wordsxphrases[2][20]{{"shrek",
-                     "coriander",
-                     "slay",
-                     "queen",
-                     "giving",
-                     "work",
-                     "word",
-                     "kick",
-                     "slick",
-                     "tick",
-                     "sick",
-                     "innocent",
-                     "guilty",
-                     "reward",
-                     "punishment",
-                     "vocabulary",
-                     "near",
-                     "far",
-                     "done",
-                     "finished"},{"thirty to fifty feral hogs",
-            "stun amogus",
-            "say sike right now",
-            "mean girls",
-            "don't be a menace to south central while sipping your juice in the hood",
-            "chinese room",
-            "callous daoboys",
-            "invent animate",
-            "arizona iced tea",
-            "knocked loose",
-            "deep in the willow",
-            "everything is quiet now",
-            "djent is not a genre",
-            "made up words",
-            "irony means getting a degree in trigonometry",
-            "fair trial",
-            "descartes really crossed a line", // this is the best one
-            "bored ape to blind ape pipeline",
-            "phrase nineteen",
-            "great job everyone"}};
-
-
-
     int lives = 7;
-    List<char>* characterList = nullptr;
-    Queue<string>* frameQueue = nullptr;
-    string lossIndicator[4] ={"l\\  r/ |--| |  |  |--\\ --- |--- |--\\  \n",
-                              " l\\r/  |  | |  |  |  |  |  |___ |  |  \n",
-                              "  t|t   |  | |  |  |  |  |  |    |  |  \n",
-                              "  t|t   |__| |__|  |__/ ___ |___ |__/  \n"};
+    ASCIIRender ascii;
+    CircularlyLinkedList* words = nullptr;
+    Queue<string>* frameQueue;
+    List<char>* characterList;
+    Graphics* graphics = new Graphics();
+
+    void getWords(int difficulty){
+        words = new CircularlyLinkedList(difficulty);
+    }
+
+    void setCharacterList(){
+        default_random_engine engine;
+        uniform_int_distribution<int> distribution(0,20);
+        characterList = new List<char>(words->pop(distribution(engine)));
+    }
 
 
 public:
-    GameInstance(int diffChoice = 1){
+
+    GameInstance():words(nullptr),characterList(nullptr),frameQueue(nullptr){}
+
+    void init(int difficulty){
+        getWords(difficulty);
+        setCharacterList();
         frameQueue = (new Queue<string>());
-        characterList = new List<char>(wordsxphrases[diffChoice-1][ASCIIRender().randomIndex(20)]);
         frameQueue->getHangmanQueue();
+        graphics->pseudo_animation(0);
     }
 
-    void display(){
+    bool nextWord(){
+        if(words->isempty()){
+            return false;
+        }
+        setCharacterList();
+        frameQueue = (new Queue<string>());
+        frameQueue->getHangmanQueue();
+        return true;
+    }
+
+
+    void display(string w_or_p){
         stringstream ss;
-        ASCIIRender().clearConsole();
+        ascii.clearConsole();
         ss << frameQueue->getFrame();
         cout << ss.str();
-        cout << "    Your word is : " << characterList << "\n";
+        cout << "    Your " + w_or_p + " is : " << characterList << "\n";
     }
 
     void display(bool w){
         stringstream ss;
-        ASCIIRender().clearConsole();
+        ascii.clearConsole();
         ss << frameQueue->getFrame();
         cout<<ss.str();
         ss.clear();
@@ -90,9 +74,7 @@ public:
             cout << "    You are free to go.";
         }else{
             cout << frameQueue->getFrame();
-            for(string s: lossIndicator) {
-                ss << ASCIIRender().enhance(s);
-            }
+            graphics->pseudo_animation(1);
             cout << ss.str();
         }
     }

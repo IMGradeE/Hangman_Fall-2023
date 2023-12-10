@@ -6,11 +6,13 @@
 #define QUEUE2_HANGMANIMAGE_H
 #include <iostream>
 #include <sstream>
-#include "ASCII.h"
+#include "HangmanGraphics.h"
 using namespace std;
 
 class HangManImageFrame {
 private:
+    default_random_engine engine;
+    uniform_int_distribution<int> distribution = uniform_int_distribution<int>(0,4);
     string data[5][3] = {
             {"                      |  \n", /* 4 lines at node 7, 3 at node 6, 2 at node 5, 1 at node 8*/
                    "             r--------\\  \n", /*in every frame top*/
@@ -23,10 +25,10 @@ private:
                    "           r/|l\\      |  \n"},
             {"           r/ l\\      |  \n",
                    "              l\\      |  \n"}
-    }; // TODO reformat
+    };
     string frame;
     string makeframe(int control_param, int innerlines = 4);
-    ASCIIRender ascii = ASCIIRender();
+    ASCIIRender ascii = ASCIIRender(distribution);
 public:
     HangManImageFrame(int control_param){
         frame = makeframe(control_param);
@@ -45,7 +47,6 @@ string HangManImageFrame::makeframe(int control_param, int innerlines){
         }
         ss<<'\n';
         frame += ascii.enhance(ss.str());
-        ss.clear();
     }
     frame += ascii.enhance(data[0][1]); // Top of hanging post
     switch (control_param) {

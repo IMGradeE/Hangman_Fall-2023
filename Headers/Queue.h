@@ -7,7 +7,7 @@
 #include <iostream>
 #include <sstream>
 #include <Windows.h>
-#include <memory>
+
 #include "HangManImage.h"
 
 using namespace std;
@@ -17,11 +17,11 @@ class Queue{
 
 public:
     struct Node{
-       shared_ptr<Node> next_node;
+       Node* next_node;
        T Frame;
        Node(T val):Frame(val),next_node(nullptr){}
    };
-    shared_ptr<Node> head = nullptr;
+    Node* head = nullptr;
 
     Queue<T>(){
     }
@@ -50,7 +50,7 @@ bool Queue<T>::isEmpty() {
 
 template<class T>
 void Queue<T>::add(T data) {
-    shared_ptr<Node> temp(new Node(data));
+    auto temp(new Node(data));
     if (isEmpty()){
         head = temp;
         return;

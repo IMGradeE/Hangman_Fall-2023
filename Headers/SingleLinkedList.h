@@ -2,12 +2,8 @@
 // Created by wilke on 10/30/2023.
 //
 
-#ifndef QUEUE2_LIST_H
-#define QUEUE2_LIST_H
-template<class Type>
-class List;
-
-
+#ifndef QUEUE2_SINGLELINKEDLIST_H
+#define QUEUE2_SINGLELINKEDLIST_H
 
 template <class Type>
 class List{
@@ -19,8 +15,8 @@ public:
         Node(Type val):
                 nodeData(val), next_node(nullptr){}
     };
-    Node* head = nullptr;
 
+    Node* head = nullptr;
 
     List<Type>():head(nullptr){}
 
@@ -48,7 +44,7 @@ public:
             current = current->next_node;
         }
         current->next_node = temp;
-    };
+    }
 
     Node* find(Type val){
         auto temp = this->head;
@@ -58,6 +54,7 @@ public:
         }
         return temp;
     }
+
     void removeAllMatches(Type val){
         auto temp = find(val);
         if (temp){
@@ -66,7 +63,7 @@ public:
         }
     }
 
-friend ostream& operator<<(ostream &out, List<Type>* list){
+    friend ostream& operator<<(ostream &out, List<Type>* list){
     Node* temp = list->head;
     while(temp){
         if (isalpha(temp->nodeData)){
@@ -89,4 +86,4 @@ friend ostream& operator<<(ostream &out, List<Type>* list){
 
 };
 
-#endif //QUEUE2_LIST_H
+#endif //QUEUE2_SINGLELINKEDLIST_H

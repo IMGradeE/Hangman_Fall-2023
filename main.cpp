@@ -1,33 +1,42 @@
 #include <iostream>
-#include <sstream>
 #include "Headers/Game.h"
-#include <windows.h>
-
 using namespace std;
+
+
+
 int main() {
     bool winner = false;
-    int difficulty;
     char choice = '0';
-    ASCIIRender ascii = ASCIIRender();
-    stringstream ss;
-    string titleCard[2] = {
-                            "| | r/l\\ |l\\ |t|-- |l\\r/| r/l\\ |l\\ |\n",
-                           "|-|r/r\\l\\| l\\|t|_/ | l/ |r/r\\l\\| l\\|\n"};
-    ss<< "\n\n\n";
-    for (int i = 0; i <3;++i){
-        for (string s: titleCard) {
-            ss << ascii.enhance(s) + "\n\n";
-        }
-    }
-    cout << ss.str();
-    ss.clear();
+    char diffchoice;
+    int difficulty;
+    string w_or_p;
+
+    GameInstance* game = new GameInstance();
+
     cout << "\n    Choose between difficulty level 1 or 2 to Begin: ";
-    GameInstance game;
-    cin >> difficulty;
+    START:
+        cin >> diffchoice;
+        if ((diffchoice == '1' || diffchoice == '2')) {
+            difficulty = diffchoice - 49;
+        } else {
+            cout << "    Try again; select either 1 or 2:  ";
+            goto START;
+        }
+
+    switch (difficulty) {
+        case 0:
+            w_or_p = "word";
+            break;
+        case 1:
+            w_or_p = "phrase";
+            break;
+    }
+
+    game->init(difficulty);
+
     do{
-         game = GameInstance(difficulty);
         do {
-            game.display();
+            game->display(w_or_p);
             try {
                 cout << "\n\n    Choose wisely: ";
                 cin >> choice;
@@ -36,20 +45,24 @@ int main() {
                 continue;
             }
             choice = tolower(choice);
-            if (game.checkValidity(choice)) {
-                if (game.winCheck()) {
+            if (game->checkValidity(choice)) {
+                if (game->winCheck()) {
                     winner = true;
                     break;
                 }
                 continue;
             } else {
-                game.wrongGuess();
+                game->wrongGuess();
                 continue;
             }
-        } while (game.getLives() > 0);
+        } while (game->getLives() > 0);
 
-        game.display(winner);
+        game->display(winner);
         cout << "\n\n    continue? (n to quit)";
         cin >> choice;
+        if(!game->nextWord() && choice != 'n'){
+            cout << "You played every " + w_or_p + " available in this difficulty! I'll send you back to the menu.";
+            goto START;
+        }
     }while(choice != 'n');
 }

@@ -10,46 +10,46 @@ for(int i = 0; i < 3; ++i){
                 ret += thickChars[count%4];
                 ret += thickChars[count%4];
             }else{
-                ret += thinChars[count%3];
-                ret += thinChars[count%3];
-                ret += thinChars[count%3];
+                ret += whiteSpace[count%3];
+                ret += whiteSpace[count%3];
+                ret += whiteSpace[count%3];
             }
             continue;
         }else if (c == '|'){
-            ret += thinChars[count%3];
+            ret += whiteSpace[count%3];
             ret += thickChars[count%4];
-            ret += thinChars[count%3];
+            ret += whiteSpace[count%3];
         }else if (c == '\'){
             if (count == 0){
                 ret += thickChars[count%4];
-                ret += thinChars[count%3];
-                ret += thinChars[count%3];
+                ret += whiteSpace[count%3];
+                ret += whiteSpace[count%3];
                 ++countdiag;
             }else if (count == 1){
-                ret += thinChars[count%3];
+                ret += whiteSpace[count%3];
                 ret += thickChars[count%4];
-                ret += thinChars[count%3];
+                ret += whiteSpace[count%3];
                 ++countdiag;
             }else{
-                ret += thinChars[count%3];
-                ret += thinChars[count%3];
+                ret += whiteSpace[count%3];
+                ret += whiteSpace[count%3];
                 ret += thickChars[count%4];
                 countdiag = 0;
             }
         }else if (c == '/'){
             if (count == 0){
                 ret += thickChars[count%4];
-                ret += thinChars[count%3];
-                ret += thinChars[count%3];
+                ret += whiteSpace[count%3];
+                ret += whiteSpace[count%3];
                 ++countdiag;
             }else if (count == 1){
-                ret += thinChars[count%3];
+                ret += whiteSpace[count%3];
                 ret += thickChars[count%4];
-                ret += thinChars[count%3];
+                ret += whiteSpace[count%3];
                 ++countdiag;
             }else{
-                ret += thinChars[count%3];
-                ret += thinChars[count%3];
+                ret += whiteSpace[count%3];
+                ret += whiteSpace[count%3];
                 ret += thickChars[count%4];
                 countdiag = 0;
             }
