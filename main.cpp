@@ -5,15 +5,13 @@ using namespace std;
 
 
 int main() {
-    bool winner = false;
-    char choice = '0';
     char diffchoice;
     int difficulty;
-    string w_or_p;
 
     GameInstance* game = new GameInstance();
 
     cout << "\n    Choose between difficulty level 1 or 2 to Begin: ";
+
     START:
         cin >> diffchoice;
         if ((diffchoice == '1' || diffchoice == '2')) {
@@ -22,6 +20,7 @@ int main() {
             cout << "    Try again; select either 1 or 2:  ";
             goto START;
         }
+    string w_or_p;
 
     switch (difficulty) {
         case 0:
@@ -34,7 +33,9 @@ int main() {
 
     game->init(difficulty);
 
+    char choice = '0';
     do{
+        bool winner = false;
         do {
             game->display(w_or_p);
             try {
@@ -65,4 +66,5 @@ int main() {
             goto START;
         }
     }while(choice != 'n');
+    delete game;
 }

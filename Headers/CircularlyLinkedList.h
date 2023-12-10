@@ -62,7 +62,7 @@ private:
                                         "great job everyone"}};
 public:
     CircularlyLinkedList(int arraySelector):head(nullptr){
-        for (int i = 0; i < wordsxphrases[arraySelector]->size(); ++i) {
+        for (int i = 0; i < 20; ++i) {
             string s = wordsxphrases[arraySelector][i];
             insert(s);
         }
@@ -82,13 +82,13 @@ public:
             for (int i = 0; i < n; ++i) {
              head = head->next;
             }
+            string ret = head->data;
+
             auto headnext = head->next;
             auto headprev = head->prev;
             headprev->next = headnext;
             headnext->prev = headprev;
             head = headnext;
-
-            string ret = head->data;
 
             return ret;
         }else{
@@ -100,7 +100,7 @@ public:
     void insert(const string s){
         auto newitem = new CircNode(s);
         if (isempty()){
-            head = newitem;
+            head = move(newitem);
             head->next = head;
             head->prev = head;
         }else{

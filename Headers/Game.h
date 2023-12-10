@@ -26,9 +26,13 @@ private:
     }
 
     void setCharacterList(){
-        default_random_engine engine;
+        random_device engine;
         uniform_int_distribution<int> distribution(0,20);
-        characterList = new List<char>(words->pop(distribution(engine)));
+        int x = distribution(engine);
+        characterList = new List<char>(words->pop(x));
+    }
+    void resetlives(){
+        lives = 7;
     }
 
 
@@ -51,6 +55,7 @@ public:
         setCharacterList();
         frameQueue = (new Queue<string>());
         frameQueue->getHangmanQueue();
+        resetlives();
         return true;
     }
 
@@ -68,7 +73,7 @@ public:
         ascii.clearConsole();
         ss << frameQueue->getFrame();
         cout<<ss.str();
-        ss.clear();
+
         Sleep(1000);
         if (w){
             cout << "    You are free to go.";

@@ -53,10 +53,10 @@ public:
             count = enhanceWidth;
             for (char c: asciiString) {
                 for(int k = 0; k < enhanceWidth;++k){
-
                     if (count <= 0){
                         count = enhanceWidth;
                     }
+
                     if (c == '-') {
                         if (i < enhanceHeight / 2) {
                             ret += thickChars[randomIndex()];
@@ -71,7 +71,6 @@ public:
                         }
                     } else if (c == '|') {
                         ret += thickChars[randomIndex()];
-                        continue;
                     } else if (c == '\\') {
                         if(k <= i) {
                             ret += thickChars[randomIndex()];
@@ -168,6 +167,7 @@ public:
 
     void pseudo_animation_helper(string arr[],int size) {
         for (int i = 228; i >= 0; --i) {
+
             if (i >= 100) {
                 Sleep(5);
                 stringstream ss;
@@ -178,6 +178,9 @@ public:
                 ss << titleCard(x, arr, size);
                 ascii.clearConsole();
                 cout << ss.str();
+                if (x == 0){
+                    x = 32;
+                }
             } else {
                 Sleep(5);
                 stringstream ss;
@@ -188,6 +191,7 @@ public:
                 cout << ss.str();
             }
         }
+
     }
 
     void pseudo_animation(int arraySelector){
@@ -198,7 +202,7 @@ public:
             int size = 2;
             pseudo_animation_helper(Title, size);
         }
-        Sleep(150);
+        Sleep(200);
 
         ascii.clearConsole();
     }
